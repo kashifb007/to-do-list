@@ -40,7 +40,7 @@ class TasksController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -60,9 +60,7 @@ class TasksController extends Controller
 
         Task::create($validator->validated());
 
-        return view('tasks', [
-            'tasks' => $tasks
-        ]);
+        return redirect()->to('/tasks');
     }
 
     /**

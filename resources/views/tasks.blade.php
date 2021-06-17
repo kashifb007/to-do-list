@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="{{ asset('style.css') }}" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -46,44 +48,45 @@
             <table>
                 <thead>
                 <tr>
-                <th>#</th>
-                <th>Task</th>
-                <th>&nbsp;</th>
+                    <th>#</th>
+                    <th>Task</th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
-            @foreach($tasks as $task)
-                <tr>
-                    <td>{{ $task->id }}</td>
-                    @if($task->completed)
-                        <td colspan="3">
-                            <del>{{ $task->task }}</del>
-                        </td>
-                    @else
-                        <td>
-                            {{ $task->task }}
-                        </td>
-                        <td>
-                            <form method="POST" action="{{route('tasks.update', $task->id) }}" name="updateForm">
-                                @method('PATCH')
-                                @csrf
-                                <button id="complete" name="complete" class="glyphicon glyphicon-thumbs-up"
-                                        type="submit"></button>
-                            </form>
-                        </td>
-                        <td>
-                            <form method="POST" action="{{route('tasks.destroy', $task->id) }}" name="deleteForm">
-                                @method('DELETE')
-                                @csrf
-                                <button id="delete" name="delete" class="btn-close" type="submit"></button>
-                            </form>
-                        </td>
-                    @endif
-                </tr>
+                @foreach($tasks as $task)
+                    <tr>
+                        <td>{{ $task->id }}</td>
+                        @if($task->completed)
+                            <td colspan="3">
+                                <del>{{ $task->task }}</del>
+                            </td>
+                        @else
+                            <td>
+                                {{ $task->task }}
+                            </td>
+                            <td>
+                                <form method="POST" action="{{route('tasks.update', $task->id) }}" name="updateForm">
+                                    @method('PATCH')
+                                    @csrf
+                                    <button id="complete" name="complete"
+                                            type="submit"><i class="fas fa-check-square"></i></button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{route('tasks.destroy', $task->id) }}" name="deleteForm">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button id="delete" name="delete" type="submit"><i class="fas fa-times-circle"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        @endif
+                    </tr>
                 @endforeach
                 </tbody>
-                </table>
-                <?php } ?>
+            </table>
+            <?php } ?>
         </div>
     </div>
 </div>
